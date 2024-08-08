@@ -246,6 +246,11 @@ def par_is_symbolic(p):
     return isinstance(p, sympy.Basic)
 
 
+def par_is_float(p):
+    """Returns True iff p is a floating point parameter instance."""
+    return isinstance(p, sympy.Float)
+
+
 def par_convert(args, prog):
     """Convert Blackbird symbolic Operation arguments into their SF counterparts.
 

@@ -37,6 +37,7 @@ from .parameters import (
     par_str,
     par_evaluate,
     par_is_symbolic,
+    par_is_float,
     par_funcs as pf,
 )
 
@@ -1372,7 +1373,16 @@ class LossChannel(Channel):
         In particular :math:`\mathcal{N}(T)\left\{\ket{0}\bra{0} \right\} =  \pr{0}`.
     """
 
+    @staticmethod
+    def _type_check(T):
+        """Checks that T is a float."""
+        if par_is_float(T):
+            raise TypeError(
+                "The T parameter to a Loss Channel must be a float."
+            )
+
     def __init__(self, T):
+        self._type_check(T)
         super().__init__([T])
 
     def _apply(self, reg, backend, **kwargs):
